@@ -4,7 +4,7 @@ const blocked = require("../data/blocked");
 const utils = require("../utils");
 
 module.exports = ({ bot, knex, config, commands }) => {
-  if (! config.allowBlock) return;
+  if (!config.allowBlock) return;
   async function removeExpiredBlocks() {
     const expiredBlocks = await blocked.getExpiredBlocks();
     const logChannel = utils.getLogChannel();
@@ -33,7 +33,7 @@ module.exports = ({ bot, knex, config, commands }) => {
 
   const blockCmd = async (msg, args, thread) => {
     const userIdToBlock = args.userId || (thread && thread.user_id);
-    if (! userIdToBlock) return;
+    if (!userIdToBlock) return;
 
     const isBlocked = await blocked.isBlocked(userIdToBlock);
     if (isBlocked) {
@@ -50,9 +50,9 @@ module.exports = ({ bot, knex, config, commands }) => {
 
     if (expiresAt) {
       const humanized = humanizeDuration(args.blockTime, { largest: 2, round: true });
-      msg.channel.createMessage(`Blocked <@${userIdToBlock}> (id \`${userIdToBlock}\`) from modmail for ${humanized}`);
+      msg.channel.createMessage(`Blocked this (anonymous) user from modmail for ${humanized}`);
     } else {
-      msg.channel.createMessage(`Blocked <@${userIdToBlock}> (id \`${userIdToBlock}\`) from modmail indefinitely`);
+      msg.channel.createMessage("Blocked this (anonymous) user from modmail indefinitely");
     }
   };
 
@@ -61,10 +61,10 @@ module.exports = ({ bot, knex, config, commands }) => {
 
   const unblockCmd = async (msg, args, thread) => {
     const userIdToUnblock = args.userId || (thread && thread.user_id);
-    if (! userIdToUnblock) return;
+    if (!userIdToUnblock) return;
 
     const isBlocked = await blocked.isBlocked(userIdToUnblock);
-    if (! isBlocked) {
+    if (!isBlocked) {
       msg.channel.createMessage("User is not blocked");
       return;
     }
@@ -87,9 +87,9 @@ module.exports = ({ bot, knex, config, commands }) => {
   commands.addInboxServerCommand("unblock", "<userId:userId> [unblockDelay:delay]", unblockCmd);
   commands.addInboxServerCommand("unblock", "[unblockDelay:delay]", unblockCmd);
 
-  commands.addInboxServerCommand("is_blocked",  "[userId:userId]",async (msg, args, thread) => {
+  commands.addInboxServerCommand("is_blocked", "[userId:userId]", async (msg, args, thread) => {
     const userIdToCheck = args.userId || (thread && thread.user_id);
-    if (! userIdToCheck) return;
+    if (!userIdToCheck) return;
 
     const blockStatus = await blocked.getBlockStatus(userIdToCheck);
     if (blockStatus.isBlocked) {
