@@ -2,7 +2,7 @@ const Eris = require("eris");
 const utils = require("./utils");
 const config = require("./cfg");
 const ThreadMessage = require("./data/ThreadMessage");
-const {THREAD_MESSAGE_TYPE} = require("./data/constants");
+const { THREAD_MESSAGE_TYPE } = require("./data/constants");
 const moment = require("moment");
 const bot = require("./bot");
 
@@ -101,25 +101,13 @@ const bot = require("./bot");
  */
 const defaultFormatters = {
   formatStaffReplyDM(threadMessage) {
-    const roleName = threadMessage.role_name || config.fallbackRoleName;
-    const modInfo = threadMessage.is_anonymous
-      ? roleName
-      : (roleName ? `(${roleName}) ${threadMessage.user_name}` : threadMessage.user_name);
-
-    return modInfo
-      ? `**${modInfo}:** ${threadMessage.body}`
-      : threadMessage.body;
+    return `Staffer: ${threadMessage.body}`;
   },
 
   formatStaffReplyThreadMessage(threadMessage) {
-    const roleName = threadMessage.role_name || config.fallbackRoleName;
-    const modInfo = threadMessage.is_anonymous
-      ? (roleName ? `(Anonymous) (${threadMessage.user_name}) ${roleName}` : `(Anonymous) (${threadMessage.user_name})`)
-      : (roleName ? `(${roleName}) ${threadMessage.user_name}` : threadMessage.user_name);
+    const modInfo = threadMessage.user_name;
 
-    let result = modInfo
-      ? `**${modInfo}:** ${threadMessage.body}`
-      : threadMessage.body;
+    let result = `**${modInfo}:** ${threadMessage.body}`;
 
     if (config.threadTimestamps) {
       const formattedTimestamp = utils.getTimestamp(threadMessage.created_at);
@@ -132,7 +120,7 @@ const defaultFormatters = {
   },
 
   formatUserReplyThreadMessage(threadMessage) {
-    let result = `**${threadMessage.user_name}:** ${threadMessage.body}`;
+    let result = `${threadMessage.body}`;
 
     for (const link of threadMessage.attachments) {
       result += `\n\n${link}`;
@@ -146,7 +134,7 @@ const defaultFormatters = {
     return result;
   },
 
- formatStaffReplyEditNotificationThreadMessage(threadMessage) {
+  formatStaffReplyEditNotificationThreadMessage(threadMessage) {
     const originalThreadMessage = threadMessage.getMetadataValue("originalThreadMessage");
     const newBody = threadMessage.getMetadataValue("newBody");
 
@@ -295,7 +283,7 @@ const defaultFormatters = {
     });
 
     const openedAt = moment(thread.created_at).format("YYYY-MM-DD HH:mm:ss");
-    const header = `# Modmail thread #${thread.thread_number} with ${thread.user_name} (${thread.user_id}) started at ${openedAt}. All times are in UTC+0.`;
+    const header = `# Modmail thread #${thread.thread_number} started at ${openedAt}. All times are in UTC+0.`;
 
     const fullResult = header + "\n\n" + lines.join("\n");
 

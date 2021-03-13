@@ -22,7 +22,7 @@ module.exports = ({ bot, knex, config, commands, hooks }) => {
 
   const logsCmd = async (msg, args, thread) => {
     let userId = args.userId || (thread && thread.user_id);
-    if (! userId) return;
+    if (!userId) return;
 
     let userThreads = await threads.getClosedThreadsByUserId(userId);
 
@@ -66,18 +66,19 @@ module.exports = ({ bot, knex, config, commands, hooks }) => {
     const lines = message.split("\n");
     const chunks = utils.chunk(lines, 15);
 
-    let root = Promise.resolve();
-    chunks.forEach(lines => {
-      root = root.then(() => msg.channel.createMessage(lines.join("\n")));
-    });
+    msg.channel.createMessage("This command is blocked.")
+    // let root = Promise.resolve();
+    // chunks.forEach(lines => {
+    //   root = root.then(() => msg.channel.createMessage(lines.join("\n")));
+    // });
   };
 
   const logCmd = async (msg, args, _thread) => {
     const threadId = args.threadId || (_thread && _thread.id);
-    if (! threadId) return;
+    if (!threadId) return;
 
     const thread = (await threads.findById(threadId)) || (await threads.findByThreadNumber(threadId));
-    if (! thread) return;
+    if (!thread) return;
 
     const customResponse = await getLogCustomResponse(thread);
     if (customResponse && (customResponse.content || customResponse.file)) {

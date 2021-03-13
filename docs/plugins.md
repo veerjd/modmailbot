@@ -18,7 +18,7 @@ Plugins are simply `.js` files that export a function that gets called when the 
 For details about the function arguments, see [Plugin API](#plugin-api) below.
 
 ### Example plugin
-This example adds a command `!mycommand` that replies with `"Reply from my custom plugin!"` when the command is used inside a modmail inbox thread channel.
+This example adds a command `+mycommand` that replies with `"Reply from my custom plugin!"` when the command is used inside a modmail inbox thread channel.
 ```js
 module.exports = function({ bot, knex, config, commands }) {
   commands.addInboxThreadCommand('mycommand', [], (msg, args, thread) => {

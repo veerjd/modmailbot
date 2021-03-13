@@ -6,7 +6,7 @@ module.exports = ({ bot, knex, config, commands }) => {
   // Mods can reply to modmail threads using !r or !reply
   // These messages get relayed back to the DM thread between the bot and the user
   commands.addInboxThreadCommand("reply", "[text$]", async (msg, args, thread) => {
-    if (! args.text && msg.attachments.length === 0) {
+    if (!args.text && msg.attachments.length === 0) {
       utils.postError(msg.channel, "Text or attachment required");
       return;
     }
@@ -14,12 +14,12 @@ module.exports = ({ bot, knex, config, commands }) => {
     const replied = await thread.replyToUser(msg.member, args.text || "", msg.attachments, false);
     if (replied) msg.delete();
   }, {
-    aliases: ["r"]
+    aliases: ["r", "mm"]
   });
 
   // Anonymous replies only show the role, not the username
   commands.addInboxThreadCommand("anonreply", "[text$]", async (msg, args, thread) => {
-    if (! args.text && msg.attachments.length === 0) {
+    if (!args.text && msg.attachments.length === 0) {
       utils.postError(msg.channel, "Text or attachment required");
       return;
     }
@@ -33,7 +33,7 @@ module.exports = ({ bot, knex, config, commands }) => {
   if (config.allowStaffEdit) {
     commands.addInboxThreadCommand("edit", "<messageNumber:number> <text:string$>", async (msg, args, thread) => {
       const threadMessage = await thread.findThreadMessageByMessageNumber(args.messageNumber);
-      if (! threadMessage) {
+      if (!threadMessage) {
         utils.postError(msg.channel, "Unknown message number");
         return;
       }
@@ -53,7 +53,7 @@ module.exports = ({ bot, knex, config, commands }) => {
   if (config.allowStaffDelete) {
     commands.addInboxThreadCommand("delete", "<messageNumber:number>", async (msg, args, thread) => {
       const threadMessage = await thread.findThreadMessageByMessageNumber(args.messageNumber);
-      if (! threadMessage) {
+      if (!threadMessage) {
         utils.postError(msg.channel, "Unknown message number");
         return;
       }

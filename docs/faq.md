@@ -2,7 +2,7 @@
 
 ## What are these numbers in front of staff replies in modmail threads?
 Each staff reply gets an internal number. This number can be used with
-`!edit`, `!delete`, `!message` and potentially other commands in the future.
+`+edit`, `+delete`, `+message` and potentially other commands in the future.
 
 ## In a [single-server setup](setup.md#single-server-setup), how do I hide modmails from regular users?
 1. Create a private category for modmail threads that only your server staff and the bot can see and set the option
@@ -18,4 +18,4 @@ By default, the bot uses the port **8890**.
 
 
 ## I want to categorize my modmail threads in multiple categories
-Set `allowMove = on` to allow your staff to move threads to other categories with `!move`
+Set `allowMove = on` to allow your staff to move threads to other categories with `+move`
