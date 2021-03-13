@@ -83,7 +83,7 @@ See `requiredAccountAge` below
 
 #### allowMove
 **Default:** `off`  
-If enabled, allows you to move threads between categories using `!move <category>`
+If enabled, allows you to move threads between categories using `+move <category>`
 
 #### allowUserClose
 **Default:** `off`  
@@ -91,19 +91,19 @@ If enabled, users can use the close command to close threads by themselves from 
 
 #### allowStaffDelete
 **Default:** `on`  
-If enabled, staff members can delete their own replies in modmail threads with `!delete`
+If enabled, staff members can delete their own replies in modmail threads with `+delete`
 
 #### allowStaffEdit
 **Default:** `on`  
-If enabled, staff members can edit their own replies in modmail threads with `!edit`
+If enabled, staff members can edit their own replies in modmail threads with `+edit`
 
 #### allowBlock
 **Default:** `on`  
-If enabled, staff members can block a user from using modmail with `!block`
+If enabled, staff members can block a user from using modmail with `+block`
 
 #### allowSuspend
 **Default:** `on`  
-If enabled, staff members can suspend a user from using modmail with `!suspend`
+If enabled, staff members can suspend a user from using modmail with `+suspend`
 
 #### allowSnippets
 **Default:** `on`  
@@ -112,19 +112,19 @@ If enabled, staff members can use [Snippets](snippets.md)
 #### allowInlineSnippets
 **Default:** `on`  
 If `allowSnippets` is enabled, this option controls whether the snippets can be included *within* replies by wrapping the snippet's name in {{ and }}.  
-E.g. `!r Hello! {{rules}}`
+E.g. `+r Hello! {{rules}}`
 
 See [inlineSnippetStart](#inlineSnippetStart) and [inlineSnippetEnd](#inlineSnippetEnd) to customize the symbols used.
 
 #### allowChangingDisplayRole
 **Default:** `on`  
-If enabled, moderators can change the role that's shown with their replies to any role they currently have using the `!role` command.
+If enabled, moderators can change the role that's shown with their replies to any role they currently have using the `+role` command.
 
 #### alwaysReply
 **Default:** `off`  
-If enabled, all messages in modmail threads will be sent to the user without having to use `!r`.  
-To send internal messages in the thread when this option is enabled, prefix them with `!note` (using your `prefix`),
-e.g. `!note This is an internal message`.
+If enabled, all messages in modmail threads will be sent to the user without having to use `+r`.  
+To send internal messages in the thread when this option is enabled, prefix them with `+note` (using your `prefix`),
+e.g. `+note This is an internal message`.
 
 #### alwaysReplyAnon
 **Default:** `off`  
@@ -183,9 +183,9 @@ If set, the bot sends this message to the user when the modmail thread is closed
 **Default:** *None*  
 Custom aliases/shortcuts for commands. Example:
 ```ini
-# !mv is an alias/shortcut for !move
+# +mv is an alias/shortcut for +move
 commandAliases.mv = move
-# !x is an alias/shortcut for !close
+# +x is an alias/shortcut for +close
 commandAliases.x = close
 ```
 
@@ -303,7 +303,7 @@ Port to use for attachments (when `attachmentStorage` is set to `local`) and log
 Make sure to do the necessary [port forwarding](https://portforward.com/) and add any needed firewall exceptions so the port is accessible from the internet.
 
 #### prefix
-**Default:** `!`  
+**Default:** `+`  
 Prefix for bot commands
 
 #### reactOnSeen
@@ -358,11 +358,11 @@ If you have a multi-line or otherwise long `responseMessage`, it might be a good
 Size limit of `relaySmallAttachmentsAsAttachments` in bytes (default is 2MB)
 
 #### snippetPrefix
-**Default:** `!!`  
+**Default:** `++`  
 Prefix for snippets
 
 #### snippetPrefixAnon
-**Default:** `!!!`  
+**Default:** `+++`  
 Prefix to use snippets anonymously
 
 #### status
@@ -375,7 +375,7 @@ The bot's status type. One of `playing`, `watching`, `listening`.
 
 #### syncPermissionsOnMove
 **Default:** `on`  
-If enabled, channel permissions for the thread are synchronized with the category when using `!move`. Requires `allowMove` to be enabled.
+If enabled, channel permissions for the thread are synchronized with the category when using `+move`. Requires `allowMove` to be enabled.
 
 #### createThreadOnMention
 **Default:** `off`  

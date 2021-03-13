@@ -3,18 +3,18 @@ const utils = require("../utils");
 
 module.exports = ({ bot, knex, config, commands }) => {
   commands.addInboxThreadCommand("id", [], async (msg, args, thread) => {
-    thread.postSystemMessage(thread.user_id);
+    thread.postSystemMessage("This command is blocked.");
   });
 
   commands.addInboxThreadCommand("dm_channel_id", [], async (msg, args, thread) => {
     const dmChannel = await thread.getDMChannel();
-    thread.postSystemMessage(dmChannel.id);
+    thread.postSystemMessage("This command is blocked.");
   });
 
   commands.addInboxThreadCommand("message", "<messageNumber:number>", async (msg, args, thread) => {
     /** @type {ThreadMessage} */
     const threadMessage = await thread.findThreadMessageByMessageNumber(args.messageNumber);
-    if (! threadMessage) {
+    if (!threadMessage) {
       thread.postSystemMessage("No message in this thread with that number");
       return;
     }
