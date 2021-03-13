@@ -234,7 +234,7 @@ async function createNewThreadForUser(user, opts = {}) {
           : utils.getInboxMentionAllowedMentions();
 
         await newThread.postNonLogMessage({
-          content: `${staffMention}New modmail thread (${newThread.user_name})`,
+          content: `${staffMention}New modmail thread!`,
           allowedMentions,
         });
       }
