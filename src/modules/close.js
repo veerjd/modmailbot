@@ -161,7 +161,7 @@ module.exports = ({ bot, knex, config, commands }) => {
     const thread = await threads.findOpenThreadByChannelId(channel.id);
     if (!thread) return;
 
-    console.log(`[INFO] Auto-closing thread with ${thread.user_name} because the channel was deleted`);
+    console.log("[INFO] Auto-closing thread because the channel was deleted");
     if (config.closeMessage) {
       const closeMessage = utils.readMultilineConfigValue(config.closeMessage);
       await thread.sendSystemMessageToUser(closeMessage).catch(() => { });
