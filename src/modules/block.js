@@ -11,7 +11,7 @@ module.exports = ({ bot, knex, config, commands }) => {
     for (const userId of expiredBlocks) {
       await blocked.unblock(userId);
       logChannel.createMessage({
-        content: `Block of <@!${userId}> (id \`${userId}\`) expired`,
+        content: "Block expired",
         allowedMentions: {
           users: [userId],
         },
@@ -95,18 +95,18 @@ module.exports = ({ bot, knex, config, commands }) => {
     if (blockStatus.isBlocked) {
       if (blockStatus.expiresAt) {
         msg.channel.createMessage({
-          content: `<@!${userIdToCheck}> (id \`${userIdToCheck}\`) is blocked until ${blockStatus.expiresAt} (UTC)`,
+          content: `A user may be blocked until ${blockStatus.expiresAt} (UTC)`,
           allowedMentions: { users: [userIdToCheck] },
         });
       } else {
         msg.channel.createMessage({
-          content: `<@!${userIdToCheck}> (id \`${userIdToCheck}\`) is blocked indefinitely`,
+          content: "A user may blocked indefinitely",
           allowedMentions: { users: [userIdToCheck] },
         });
       }
     } else {
       msg.channel.createMessage({
-        content: `<@!${userIdToCheck}> (id \`${userIdToCheck}\`) is NOT blocked`,
+        content: "A user may NOT be blocked",
         allowedMentions: { users: [userIdToCheck] },
       });
     }
