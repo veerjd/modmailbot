@@ -13,7 +13,7 @@ const { getModeratorThreadDisplayRoleName } = require("./displayRoles");
 
 const ThreadMessage = require("./ThreadMessage");
 
-const {THREAD_MESSAGE_TYPE, THREAD_STATUS, DISCORD_MESSAGE_ACTIVITY_TYPES} = require("./constants");
+const { THREAD_MESSAGE_TYPE, THREAD_STATUS, DISCORD_MESSAGE_ACTIVITY_TYPES } = require("./constants");
 
 /**
  * @property {String} id
@@ -72,7 +72,7 @@ class Thread {
   async _sendDMToUser(content, file = null) {
     // Try to open a DM channel with the user
     const dmChannel = await this.getDMChannel();
-    if (! dmChannel) {
+    if (!dmChannel) {
       throw new Error("Could not open DMs with the user. They may have blocked the bot or set their privacy settings higher.");
     }
 
@@ -112,7 +112,7 @@ class Thread {
     } catch (e) {
       // Channel not found
       if (e.code === 10003) {
-        console.log(`[INFO] Failed to send message to thread channel for ${this.user_name} because the channel no longer exists. Auto-closing the thread.`);
+        console.log("[INFO] Failed to send message to thread channel because the channel no longer exists. Auto-closing the thread.");
         this.close(true);
       } else {
         throw e;
@@ -277,7 +277,7 @@ class Thread {
     const inboxContent = formatters.formatStaffReplyThreadMessage(threadMessage);
 
     // Because moderator replies have to be editable, we enforce them to fit within 1 message
-    if (! utils.messageContentIsWithinMaxLength(dmContent) || ! utils.messageContentIsWithinMaxLength(inboxContent)) {
+    if (!utils.messageContentIsWithinMaxLength(dmContent) || !utils.messageContentIsWithinMaxLength(inboxContent)) {
       await this._deleteThreadMessage(threadMessage.id);
       await this.postSystemMessage("Reply is too long! Make sure your reply is under 2000 characters total, moderator name in the reply included.");
       return false;
@@ -352,11 +352,11 @@ class Thread {
     if (msg.activity) {
       let applicationName = msg.application && msg.application.name;
 
-      if (! applicationName && msg.activity.party_id.startsWith("spotify:")) {
+      if (!applicationName && msg.activity.party_id.startsWith("spotify:")) {
         applicationName = "Spotify";
       }
 
-      if (! applicationName) {
+      if (!applicationName) {
         applicationName = "Unknown Application";
       }
 
@@ -426,7 +426,7 @@ class Thread {
       const mentionsStr = ids.map(id => `<@!${id}> `).join("");
 
       await this.deleteAlerts();
-      await this.postSystemMessage(`${mentionsStr}New message from ${this.user_name}`, {
+      await this.postSystemMessage(`${mentionsStr}New message`, {
         allowedMentions: {
           users: ids,
         },
@@ -498,7 +498,7 @@ class Thread {
 
     if (opts.postToThreadChannel !== false) {
       const inboxContent = await formatters.formatSystemToUserThreadMessage(threadMessage);
-      const finalInboxContent = typeof inboxContent === "string" ? {content: inboxContent} : inboxContent;
+      const finalInboxContent = typeof inboxContent === "string" ? { content: inboxContent } : inboxContent;
       finalInboxContent.allowedMentions = opts.allowedMentions;
       const inboxMsg = await this._postToThreadChannel(inboxContent);
       threadMessage.inbox_message_id = inboxMsg.id;
@@ -600,7 +600,7 @@ class Thread {
    * @returns {Promise<void>}
    */
   async close(suppressSystemMessage = false, silent = false) {
-    if (! suppressSystemMessage) {
+    if (!suppressSystemMessage) {
       console.log(`Closing thread ${this.id}`);
 
       if (silent) {
@@ -727,7 +727,7 @@ class Thread {
       alerts = [userId]
     } else {
       alerts = alerts.split(",");
-      if (! alerts.includes(userId)) {
+      if (!alerts.includes(userId)) {
         alerts.push(userId);
       }
     }
@@ -806,7 +806,7 @@ class Thread {
 
     // Same restriction as in replies. Because edits could theoretically change the number of messages a reply takes, we enforce replies
     // to fit within 1 message to avoid the headache and issues caused by that.
-    if (! utils.messageContentIsWithinMaxLength(formattedDM) || ! utils.messageContentIsWithinMaxLength(formattedThreadMessage)) {
+    if (!utils.messageContentIsWithinMaxLength(formattedDM) || !utils.messageContentIsWithinMaxLength(formattedThreadMessage)) {
       await this.postSystemMessage("Edited reply is too long! Make sure the edit is under 2000 characters total, moderator name in the reply included.");
       return false;
     }
@@ -814,7 +814,7 @@ class Thread {
     await bot.editMessage(threadMessage.dm_channel_id, threadMessage.dm_message_id, formattedDM);
     await bot.editMessage(this.channel_id, threadMessage.inbox_message_id, formattedThreadMessage);
 
-    if (! opts.quiet) {
+    if (!opts.quiet) {
       const editThreadMessage = new ThreadMessage({
         message_type: THREAD_MESSAGE_TYPE.REPLY_EDITED,
         user_id: null,
@@ -846,7 +846,7 @@ class Thread {
     await bot.deleteMessage(threadMessage.dm_channel_id, threadMessage.dm_message_id);
     await bot.deleteMessage(this.channel_id, threadMessage.inbox_message_id);
 
-    if (! opts.quiet) {
+    if (!opts.quiet) {
       const deletionThreadMessage = new ThreadMessage({
         message_type: THREAD_MESSAGE_TYPE.REPLY_DELETED,
         user_id: null,

@@ -229,7 +229,7 @@ const defaultFormatters = {
       }
 
       if (message.message_type === THREAD_MESSAGE_TYPE.FROM_USER) {
-        line += ` [FROM USER] [${message.user_name}] ${message.body}`;
+        line += ` [FROM USER] ${message.body}`;
       } else if (message.message_type === THREAD_MESSAGE_TYPE.TO_USER) {
         if (opts.verbose) {
           line += ` [TO USER] [${message.message_number || "0"}] [${message.user_name}]`;
@@ -271,7 +271,7 @@ const defaultFormatters = {
         line += ` [REPLY DELETED] ${originalThreadMessage.user_name} deleted reply ${originalThreadMessage.message_number}:`;
         line += `\n\n${originalThreadMessage.body}`;
       } else {
-        line += ` [${message.user_name}] ${message.body}`;
+        line += `${message.body}`;
       }
 
       if (message.attachments.length) {
