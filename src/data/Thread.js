@@ -390,7 +390,7 @@ class Thread {
       message_type: THREAD_MESSAGE_TYPE.FROM_USER,
       user_id: this.user_id,
       user_name: fullUserName,
-      body: messageContent,
+      body: `**User:** ${messageContent}`,
       is_anonymous: 0,
       dm_message_id: msg.id,
       dm_channel_id: msg.channel.id,
