@@ -61,7 +61,41 @@ Edit your own previous reply sent with `+reply`.
 Delete your own previous reply sent with `+reply`.  
 `<number>` is the message number shown in front of staff replies in the thread channel.
 
-### `+message <number>`
+### `!role`
+View your display role for the thread - the role that is shown in front of your name in your replies
+
+### `!role reset`
+Reset your display role for the thread to the default
+
+### `!role <role name>`
+Change your display role for the thread to any role you currently have
+
+### `!loglink`
+Get a link to the open Modmail thread's log.
+
+### `!loglink -s`
+Get a link to the open Modmail thread's log, only showing messages to/from the user (ignores mod chatter within the thread).
+
+### `!loglink -v`
+Get a link to the open Modmail thread's log, showing extra details about channel and message IDs between the bot and the user.
+This is mainly useful when reporting messages to Discord's Trust & Safety team.
+
+### `!id`
+Prints the user's ID.
+
+### `!note <text>`
+Add a note for the user
+
+### `!notes <userID>`
+Show all notes for the user
+
+### `!delete_note <noteID>`
+Delete the specified note. The note ID is shown when running `!notes`.
+
+### `!dm_channel_id`
+Prints the ID of the current DM channel with the user
+
+### `!message <number>`
 Shows the DM channel ID, DM message ID, and message link of the specified user reply.
 `<number>` is the message number shown in front of staff replies in the thread channel.
 
@@ -91,7 +125,28 @@ Unblock the specified user, allowing them to use Modmail again.
 ### `+is_blocked <userID>`
 Check if the specified user is blocked.
 
-**Example:** `+is_blocked 106391128718245888`
+**Example:** `!is_blocked 106391128718245888`
+
+### `!role`
+(Outside a modmail thread) View your default display role - the role that is shown in front of your name in your replies
+
+### `!role reset`
+(Outside a modmail thread) Reset your default display role
+
+### `!role <role name>`
+(Outside a modmail thread) Change your default display role to any role you currently have
+
+### `!note <userID> <text>`
+Add a note for the specified user
+
+### `!notes <userID>`
+Show all notes for the specified user
+
+### `!delete_note <noteID>`
+Delete the specified note. The note ID is shown when running `!notes`.
+
+### `!version`
+Show the Modmail bot's version.
 
 ## Snippets (canned messages)
 See the [📋 Snippets](snippets.md) page for more information!
