@@ -246,6 +246,14 @@ async function createNewThreadForUser(user, opts = {}) {
     // Post some info to the beginning of the new thread
     let infoHeader = "New ModMail!\nReplies are anonymous to the sender, but not in this channel";
 
+    //BYCOP
+    const row = await knex("notes")
+    .where("user_id", user.id)
+    .first();
+    if (row !== undefined && row.note !== "undefined") {
+      infoHeader += `\n\nNote : **${row.note}**.`;
+    }
+
     infoHeader += "\n────────────────";
 
     const { message: threadHeaderMessage } = await newThread.postSystemMessage(infoHeader, {
