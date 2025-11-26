@@ -3,6 +3,7 @@
 /node_modules
 /welcome.png
 /update.sh
+*.sqlite
 
 # Config files
 /config.*
